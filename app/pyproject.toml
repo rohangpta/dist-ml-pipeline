@@ -1,20 +1,18 @@
 [tool.poetry]
-name = "final-project-188"
+name = "app"
 version = "0.1.0"
 description = ""
 authors = ["Rohan Gupta <rohangupta883@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-torch = {version = "^1.10.0", python = "3.9"}
-torchvision = {version = "^0.11.1", python = "3.9"}
 fastapi = "^0.70.0"
-redis = "^4.0.2"
-black = "^21.11b1"
-requests = "^2.26.0"
+torch = "^1.10.0"
+torchvision = "^0.11.1"
 uvicorn = "^0.15.0"
+Pillow = "^8.4.0"
 python-multipart = "^0.0.5"
-numpy = {version = "^1.21.4", python = "3.9"}
+boto3 = "^1.20.18"
 
 [tool.poetry.dev-dependencies]
 
