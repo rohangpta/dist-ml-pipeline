@@ -16,4 +16,4 @@ RUN poetry install
 COPY ./models/ /training/models/
 COPY ./training/ /training/
 
-CMD ["poetry", "run", "python3", "mnist.py"]
+ENTRYPOINT ["poetry", "run", "python3", "-u", "mnist.py"]

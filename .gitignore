@@ -1,2 +1,3 @@
 /data/**
-creds.json
+k8s/secrets.yaml
+.gitignore

@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: predict-app
+spec:
+  selector:
+    matchLabels:
+      app: predict-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: predict-app
+    spec:
+      containers:
+        - name: predict-app
+          image: predict-app:v1
+          ports:
+            - containerPort: 8000
+              hostPort: 8000
+          env:
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-creds
+                  key: access
+            - name: SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-creds
+                  key: secret_access
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: predict-app
+  labels:
+    app: predict-app
+spec:
+  ports:
+    - port: 8000
+      protocol: TCP
+  selector:
+    app: predict-app

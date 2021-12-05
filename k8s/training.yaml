@@ -1,0 +1,79 @@
+apiVersion: "kubeflow.org/v1"
+kind: PyTorchJob
+metadata:
+  name: pt-mnist
+spec:
+  pytorchReplicaSpecs:
+    Master:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: pytorch
+              image: training:v1
+              args:
+                [
+                  "--lr=0.01",
+                  "--epochs=1",
+                  "--batch-size=100",
+                  "--momentum=0.5",
+                ]
+              volumeMounts:
+                - name: training-data
+                  mountPath: /data
+              env:
+                - name: ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: s3-creds
+                      key: access
+                - name: SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: s3-creds
+                      key: secret_access
+          volumes:
+            - name: training-data
+              hostPath:
+                path: /data
+
+    Worker:
+      replicas: 2
+      restartPolicy: OnFailure
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: pytorch
+              image: training:v1
+              args:
+                [
+                  "--lr=0.01",
+                  "--epochs=1",
+                  "--batch-size=100",
+                  "--momentum=0.5",
+                ]
+              volumeMounts:
+                - name: training-data
+                  mountPath: /data
+              env:
+                - name: ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: s3-creds
+                      key: access
+                - name: SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: s3-creds
+                      key: secret_access
+          volumes:
+            - name: training-data
+              hostPath:
+                path: /data

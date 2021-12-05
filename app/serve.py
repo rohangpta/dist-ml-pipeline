@@ -6,17 +6,22 @@ import torch
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from PIL import Image, ImageOps
 from torchvision.transforms import transforms
-
+import os
 from models.model1 import Model1
 
 app = FastAPI()
-creds = json.load(open("/run/secrets/aws_creds"))
+
 client = boto3.client(
     "s3",
-    aws_access_key_id=creds["access"],
-    aws_secret_access_key=creds["secret_access"],
-    region_name="ap-south-1",
+    aws_access_key_id=os.getenv("ACCESS_KEY"),
+    aws_secret_access_key=os.getenv("SECRET_ACCESS_KEY"),
+    region_name="us-east-1",
 )
+
+
+@app.get("/")
+def landing():
+    return {"Welcome": "User"}
 
 
 @app.post("/predict")
@@ -24,7 +29,6 @@ def predict_mnist(raw_image: UploadFile = File(...)):
     """
     We take in a raw image that is uploaded and we return the prediction our model gives on this image.
     """
-
     image = preprocess_image_mnist(raw_image)
     if image is None:
         raise HTTPException(status_code=404)

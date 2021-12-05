@@ -2,23 +2,15 @@ version: "3"
 
 services:
   app:
+    image: predict-app:v1
     build:
       context: .
       dockerfile: ./app/Dockerfile
     ports:
-      - "8000:8000"
-    secrets:
-      - aws_creds
+      - 8000:8000
 
   training:
+    image: training:v1
     build:
       context: .
       dockerfile: ./training/Dockerfile
-    volumes:
-      - "./data:/data/"
-    secrets:
-      - aws_creds
-
-secrets:
-  aws_creds:
-    file: creds.json
