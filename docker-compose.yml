@@ -14,3 +14,9 @@ services:
     build:
       context: .
       dockerfile: ./training/Dockerfile
+
+  cronjob:
+    image: cron-ptjob:v4
+    build:
+      context: .
+      dockerfile: ./cronjob/Dockerfile
