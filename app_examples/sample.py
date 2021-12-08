@@ -7,7 +7,7 @@ with open("app_examples/imgs/four.jpg", "rb") as f:
         url="http://0.0.0.0:8000/predict",
         files={"raw_image": (f.name, f, "multipart/form-data")},
     )
-    assert r.json()["Prediction"] == 4
+    print(r.json())
 
 
 with open("app_examples/imgs/three.jpg", "rb") as f:
@@ -15,6 +15,6 @@ with open("app_examples/imgs/three.jpg", "rb") as f:
         url="http://0.0.0.0:8000/predict",
         files={"raw_image": (f.name, f, "multipart/form-data")},
     )
-    assert r.json()["Prediction"] == 3
+    print(r.json())
 
 sys.stdout.write("Success!")

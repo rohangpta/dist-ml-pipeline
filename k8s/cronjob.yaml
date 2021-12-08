@@ -3,9 +3,9 @@ kind: ClusterRole
 metadata:
   name: cr-role
 rules:
-  - apiGroups: ["", "kubeflow.org"]
-    resources: ["pods", "pytorchjobs"]
-    verbs: ["get", "list", "create", "update", "delete"]
+  - apiGroups: ["", "extensions", "apps", "kubeflow.org"]
+    resources: ["pods", "pytorchjobs", "deployments", "namespaces"]
+    verbs: ["get", "list", "create", "update", "delete", "watch"]
 
 ---
 kind: ClusterRoleBinding
@@ -27,7 +27,7 @@ kind: CronJob
 metadata:
   name: cron-ptjob
 spec:
-  schedule: "* * * * *"
+  schedule: "*/2 * * * *"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
   concurrencyPolicy: Forbid
@@ -37,5 +37,5 @@ spec:
         spec:
           containers:
             - name: cron-ptjob
-              image: cron-ptjob:v4
+              image: cron-ptjob:v1
           restartPolicy: OnFailure

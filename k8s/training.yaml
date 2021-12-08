@@ -18,7 +18,7 @@ spec:
               args:
                 [
                   "--lr=0.01",
-                  "--epochs=1",
+                  "--epochs=10",
                   "--batch-size=100",
                   "--momentum=0.5",
                 ]
