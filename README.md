@@ -1,17 +1,18 @@
-# End-To-End MLOps 
+# End to End Machine Learning Development
 
-## CIS 188 Final Project
+Develop an end-to-end Machine Learning pipeline with a training job, sample model definition, and prediction service.
 
-Develop an end-to-end Machine Learning pipeline with support for distributed workloads using PyTorchJob, Continuous Training using CronJob (implemented using the kubernetes Python SDK) and Continuous Monitoring using Fluent Bit as a DaemonSet, hooked to S3.
+Integrate support for distributed workloads using PyTorchJob, Continuous Training using CronJob (implemented using the kubernetes Python SDK) and Continuous Monitoring using Fluent Bit as a DaemonSet, hooked to S3.
 
-Follow conventional DevOps & MLOps practices including separating training and prediction, containerisation & deployment on K8s. Further support for declarative development using a `kind_config.yaml` file. 
+Follow conventional DevOps & MLOps practices including separating training and prediction, containerisation & deployment on Kubernetes. Further support for declarative development using a `kind_config.yaml` file. 
 
-Key features:
+## Key features:
 
 - Model-agnostic training framework
-- Declarative development
-- ML-at-scale via distributed jobs
-- Continuous Training via CronJob
+- Declarative development (in Kind)
+- ML-at-scale via distributed PyTorch jobs
+- Continuous Training via CronJob to retrigger
 - Continuous Monitoring via Fluent Bit and S3
 
-Author: Rohan Gupta
+
+Note: used as final project for CIS 188 (https://cis188.org/)
