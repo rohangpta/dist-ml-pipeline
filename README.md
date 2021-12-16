@@ -23,4 +23,4 @@ Plug-and-play with different models in `models/`, and tune hyparameters in `k8s/
 Run standalone jobs during model development using `k create job --from=cronjob/cron-ptjob cron-ptjob`.
 
 
-Note: used as final project for CIS 188 (https://cis188.org/)
+Used as final project for CIS 188 at the University of Pennsylvania (https://cis188.org/)
