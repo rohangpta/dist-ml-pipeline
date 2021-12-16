@@ -14,5 +14,13 @@ Follow conventional DevOps & MLOps practices including separating training and p
 - Continuous Training via CronJob to retrigger
 - Continuous Monitoring via Fluent Bit and S3
 
+## Setup Instructions
+
+After cloning the repository, build the images via the provided `docker-compose.yml` file. If running in Kind, create cluster, load images, and apply manifests. Ensure `k8s/cronjob.yaml` has the correct schedule and S3 credentials are provided via Kubernetes secrets. 
+
+Plug-and-play with different models in `models/`, and tune hyparameters in `k8s/training.yaml`. Customise number of workers, GPU usage & training backend in `k8s/training.yaml`.
+
+Run standalone jobs during model development using `k create job --from=cronjob/cron-ptjob cron-ptjob`.
+
 
 Note: used as final project for CIS 188 (https://cis188.org/)
